@@ -53,6 +53,7 @@ var PhotoSphereViewer = function(args) {
 	 * Detects whether canvas is supported
 	 * @return (boolean) true if canvas is supported, false otherwise
 	 **/
+   args.container = document.getElementById(args.container);
 
 	var isCanvasSupported = function() {
 		var canvas = document.createElement('canvas');
@@ -68,6 +69,9 @@ var PhotoSphereViewer = function(args) {
 		var canvas = document.createElement('canvas');
 		return !!(window.WebGLRenderingContext && canvas.getContext('webgl'));
 	};
+
+  var isFade = false;
+  var curOpacity = 1;
 
 	/**
 	 * Attaches an event handler function to an elemnt
@@ -439,6 +443,17 @@ var PhotoSphereViewer = function(args) {
 
               loadXMP();
           }
+          else if(waypoint.action == "move_scene") {
+
+            document.getElementById("content").className = "fader fadedOut";
+
+
+            var json_obj = JSON.parse(Get(waypoint.ref));
+            var PSV2 = new PhotoSphereViewer(json_obj);
+
+
+
+          }
           else if(waypoint.action == "show_description"){
             var info = document.getElementById("info");
             info.innerHTML = waypoint.ref;
@@ -518,6 +533,8 @@ var PhotoSphereViewer = function(args) {
 
 		// Panorama is ready
 		triggerAction('ready');
+
+    document.getElementById("content").className = "fader";
 	};
 
 
@@ -533,7 +550,15 @@ var PhotoSphereViewer = function(args) {
 		point.setY(Math.sin(lat));
 		point.setZ(Math.cos(lat) * Math.cos(long));
 
+if(isFade){
 
+  var fadeMesh = new THREE.Mesh( geometry, material );
+  fadeMesh.material.opacity = 1;
+  scene.add( fadeMesh );
+
+
+
+}
 
 		camera.lookAt(point);
 		renderer.render(scene, camera);

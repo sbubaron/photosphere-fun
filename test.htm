@@ -23,29 +23,14 @@ padding: 2em;
 left: 10px;
     }
 
-
-    .fader {
-      background-color: #000;
-    -moz-transition: opacity 0.7s linear;
-    -o-transition: opacity 0.7s linear;
-    -webkit-transition: opacity 0.7s linear;
-    transition: opacity 0.7s linear;
-}
-
-.fader.fadedOut {
-    opacity: 0;
-}
-
-
-
     </style>
 	</head>
 
 	<body>
 
-		<div id="content" class="">
+		<div id="content">
 
-			<div id="container" class="fader"></div>
+			<div id="container"></div>
 
       <div id="info">
         INFO
@@ -74,18 +59,55 @@ left: 10px;
   	var div = document.getElementById('container');
   	div.style.height = '30px';
 
-    var json_obj = JSON.parse(Get("somas.json"));
-    console.log("this is the author name: "+json_obj);
+  	var PSV = new PhotoSphereViewer({
+  		// Path to the panorama
+  		panorama: 'pan-somas.jpg',
 
-  	var PSV = new PhotoSphereViewer(json_obj);
-  }
 
-  function Get(yourUrl){
-    var Httpreq = new XMLHttpRequest(); // a new request
-    Httpreq.open("GET",yourUrl,false);
-    Httpreq.send(null);
-    return Httpreq.responseText;
+  		// Container
+  		container: div,
+      waypoints: [
 
+        {
+          lat:0.3141592653589793,
+          lon:4.63741348394166,
+          icon: 'door.png',
+          action: 'link',
+          ref: "default.htm",
+          description: "Go Default"
+        }
+      ],
+
+      tilt_up_max: Math.PI / 10,
+      tilt_down_max: Math.PI / 5,
+
+  		// Deactivate the animation
+  		time_anim: false,
+
+  		// Display the navigation bar
+  		navbar: true,
+
+  		// Resize the panorama
+  		size: {
+  			width: '100%',
+  			height: '1080'
+  		},
+
+  		// HTML loader
+  		loading_html: loader,
+
+  		// Overlay
+  		overlay: {
+  			image: 'overlay.png',
+  			size: {
+  				width: '42px'
+  			},
+  			position: {
+  				x: 'right',
+  				y: 'top'
+  			}
+  		}
+  	});
   }
 
   </script>

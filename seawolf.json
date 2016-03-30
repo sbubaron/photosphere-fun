@@ -1,0 +1,54 @@
+{
+  "panorama": "pan-seawolf.jpg",
+  "container": "container",
+  "waypoints": [
+    {
+      "lat":0,
+      "lon":0,
+      "icon": "shield.png",
+      "action": "change_scene",
+      "ref": "snow.jpg",
+      "description": "Change Scene"
+    },
+
+    {
+      "lat":-0.13962634015954592,
+      "lon":4.703662334124697,
+      "icon": "magnifying.png",
+      "action": "show_description",
+      "ref": "Theres some really cool stuff in this tank! <img src='pics/shield.png'/>",
+      "description": "View More"
+    },
+
+    {
+      "lat":0.3141592653589793,
+      "lon":5.63741348394166,
+      "icon": "door.png",
+      "action": "link",
+      "ref": "test.htm",
+      "description": "Go DoIT"
+    }
+  ],
+
+  "tilt_up_max": 0.3141592653589793,
+  "tilt_down_max": 0.6283185307179586,
+  "time_anim": false,
+  "navbar": true,
+  "size": {
+    "width": "100%",
+    "height": "1080"
+  },
+
+
+  "loading_img": "sun.jpg",
+  "overlay": {
+    "image": "overlay.png",
+    "size": {
+      "width": "42px"
+    },
+    "position": {
+      "x": "right",
+      "y": "top"
+    }
+  }
+}
