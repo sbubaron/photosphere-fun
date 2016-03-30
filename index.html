@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>Photo Sphere Viewer</title>
+		<meta name="viewport" content="initial-scale=1.0" />
+		<link rel="stylesheet" href="./example1.css" />
+		<script src="/scripts/three.min.js"></script>
+    <script src="/scripts/CSS3DRenderer.js"></script>
+		<script src="/scripts/photo-sphere-viewer.js"></script>
+
+    <style>
+
+    #info{
+      display: none;
+width: 500px;
+position: absolute;
+top: 10px;
+background-color: 33ccff;
+background-color: #33ccff;
+padding: 2em;
+left: 10px;
+    }
+
+    </style>
+	</head>
+
+	<body>
+
+		<div id="content">
+
+			<div id="container"></div>
+
+      <div id="info">
+        INFO
+      </div>
+		</div>
+	</body>
+
+  <script>
+
+  window.onload = function() {
+    loadPredefinedPanorama(false);
+  	//document.getElementById('go').addEventListener('click', loadPredefinedPanorama, false);
+
+  	//document.getElementById('pano').addEventListener('change', upload, false);
+  };
+
+  // Load the predefined panorama
+  function loadPredefinedPanorama(evt) {
+  	//evt.preventDefault();
+
+  	// Loader
+  	var loader = document.createElement('div');
+  	loader.className = 'loader';
+
+  	// Panorama display
+  	var div = document.getElementById('container');
+  	div.style.height = '30px';
+
+  	var PSV = new PhotoSphereViewer({
+  		// Path to the panorama
+  		panorama: 'pan-seawolf.jpg',
+
+
+  		// Container
+  		container: div,
+      waypoints: [
+        {
+          lat:0,
+          lon:0,
+          icon: 'shield.png',
+          action: 'change_scene',
+          ref: "snow.jpg",
+          description: "Change Scene"
+        },
+
+        {
+          lat:-0.13962634015954592,
+          lon:4.703662334124697,
+          icon: 'magnifying.png',
+          action: 'show_description',
+          ref: "Theres some really cool stuff in this tank! <img src='pics/shield.png'/>",
+          description: "View More"
+        },
+
+        {
+          lat:0.3141592653589793,
+          lon:5.63741348394166,
+          icon: 'door.png',
+          action: 'link',
+          ref: "http://it.stonybrook.edu",
+          description: "Go DoIT"
+        }
+      ],
+
+      tilt_up_max: Math.PI / 10,
+      tilt_down_max: Math.PI / 5,
+
+  		// Deactivate the animation
+  		time_anim: false,
+
+  		// Display the navigation bar
+  		navbar: true,
+
+  		// Resize the panorama
+  		size: {
+  			width: '100%',
+  			height: '1080'
+  		},
+
+  		// HTML loader
+  		loading_html: loader,
+
+  		// Overlay
+  		overlay: {
+  			image: 'overlay.png',
+  			size: {
+  				width: '42px'
+  			},
+  			position: {
+  				x: 'right',
+  				y: 'top'
+  			}
+  		}
+  	});
+  }
+
+  </script>
+
+</html>
